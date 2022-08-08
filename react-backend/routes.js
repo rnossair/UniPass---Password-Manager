@@ -15,11 +15,11 @@ module.exports = function (app, Account) {
         });
       });
          
-      app.post('/api/login', passport.authenticate('local', { failureRedirect: '/api/failLogin', failureFlash: false }), function(req, res) {
-        res.send('Approved');
-      });
-      app.get("/api/failLogin", (req, res) => {
-        res.send("Not approved");
+    app.post('/api/login', passport.authenticate('local', { failureRedirect: '/api/failLogin', failureFlash: false }), function(req, res) {
+       res.send('Approved');
+    });
+    app.get("/api/failLogin", (req, res) => {
+       res.send("Not approved");
     })
     app.get('/api/logout', function(req, res) {
       req.logout(function(err) {
@@ -37,6 +37,10 @@ module.exports = function (app, Account) {
             res.send({result:"Not approved"})
         }
         
+    })
+    app.get("/api/getUser", function(req,res){
+      console.log(req.user);
+      res.send({username: req.user.username});
     })
 
 }

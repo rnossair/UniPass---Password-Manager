@@ -1,5 +1,5 @@
 import React from "react";
-import {Navigate} from "react-router-dom";
+import AuthPoint from "./AuthPoint";
 
 class Login extends React.Component{
     constructor(props){
@@ -7,7 +7,7 @@ class Login extends React.Component{
         this.state = {
             username: "",
             password:"",
-            registered: false
+            loggedon: false
         }
         this.handleInput = this.handleInput.bind(this);
         this.login = this.login.bind(this);
@@ -34,10 +34,8 @@ class Login extends React.Component{
 
     }
     checkRedirect(){
-        if(this.state.loggedon){
-            console.log(document.cookie);
-            return(<Navigate to="/gen"/>);
-        }       
+            return(<AuthPoint prevUrl="/login" nextUrl="/profile"/>);
+        
     }
     render(){
         return(

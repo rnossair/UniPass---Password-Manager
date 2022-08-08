@@ -6,6 +6,9 @@ import Register from './pages/Register';
 import AuthPoint from "./pages/AuthPoint";
 import Logoff from './pages/Logout';
 import Login from './pages/Login';
+import PassList from "./pages/passList";
+import Profile from './pages/profile';
+import { Navigate } from 'react-router-dom';
 export default function App() {
     return (
       <Routes>
@@ -15,6 +18,9 @@ export default function App() {
         <Route path="/auth" element={<AuthPoint/>}/>
         <Route path="/logout" element={<Logoff/>}/>
         <Route path="/login" element={<Login/>}/>
+        <Route path="/passlist" element={<PassList/>}/>
+        <Route path="/profile" element={<Profile/>}/>
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
 
         
