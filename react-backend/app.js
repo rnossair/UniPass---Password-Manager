@@ -16,6 +16,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var passRouter = require("./routes/passGen");
 const Account = require('./models/Account.js');
+const managePass = require('./routes/managePass.js');
 
 var app = express();
 
@@ -45,6 +46,7 @@ app.use('/users', usersRouter);
 app.use("/api/pass", passRouter);
 auth(app, Account);
 routes(app, Account);
+managePass(app, Account);
 
 
 
