@@ -5,9 +5,9 @@ function decrypt(masterPass, salt, iv, encrypted){
     const key = crypto.scryptSync(masterPass, salt, 32);
     const decipher = crypto.createDecipheriv(algorithm, key, niv);
     let decrypted = decipher.update(encrypted, "hex", "utf8");
-
     // Getting the buffer data of cipher 
     decrypted += decipher.final('utf8');
-    console.log({decrypted: decrypted});
+    
+    return {decrypted: decrypted}
 }
 module.exports = decrypt;

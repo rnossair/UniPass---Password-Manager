@@ -10,6 +10,6 @@ function encrypt(masterPass, pass){
 
     // Getting the buffer data of cipher 
     encrypted += cipher.final('hex');
-    console.log({encrypted: encrypted, salt: salt, iv: iv.toString("hex")});
+    return {encrypted: encrypted, salt: salt, iv: iv.toString("hex")};
 }
 module.exports = encrypt;
