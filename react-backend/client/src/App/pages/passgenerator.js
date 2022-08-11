@@ -35,7 +35,6 @@ class PassGen extends Component {
 
     var copyText = document.getElementById(e.currentTarget.id);
     navigator.clipboard.writeText(copyText.textContent);
-    //alert("Copied the text: " + copyText.textContent);
   }
   render(){
     return (
