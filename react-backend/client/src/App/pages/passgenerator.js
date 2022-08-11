@@ -27,9 +27,6 @@ class PassGen extends Component {
     .then(obj => {
       this.setState({passwords: obj.passwords});
     });
-    fetch("/api/authCheck", {method: "GET"})
-    .then(res => res.json())
-    .then(res => console.log(res.result));
   }
    copyToClipBoard(e) {
 
