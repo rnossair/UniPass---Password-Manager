@@ -20,8 +20,6 @@ module.exports = function (app, Account) {
       console.log(req.user);
       res.send({username: req.user.username});
     })
-    app.get("/api/save-pass", function(req, res){
-        
-    })
+
 
 }

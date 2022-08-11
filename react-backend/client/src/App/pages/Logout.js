@@ -11,6 +11,7 @@ function Logoff(){
         })
     }
         return(<div className="LogOut">
+            <p>Logging out...</p>
                 {checkLogOut()}
         </div>);
 }
