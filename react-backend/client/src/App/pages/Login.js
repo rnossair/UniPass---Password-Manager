@@ -1,5 +1,6 @@
 import React from "react";
 import AuthPoint from "./AuthPoint";
+import { Navigate } from "react-router-dom";
 
 class Login extends React.Component{
     constructor(props){
@@ -11,7 +12,7 @@ class Login extends React.Component{
         }
         this.handleInput = this.handleInput.bind(this);
         this.login = this.login.bind(this);
-        this.checkRedirect = this.checkRedirect.bind(this);
+        this.checkLogState = this.checkLogState.bind(this);
     }
     handleInput(e){
         let elmId = e.currentTarget.id;
@@ -33,9 +34,14 @@ class Login extends React.Component{
             })
 
     }
-    checkRedirect(){
-            return(<AuthPoint prevUrl="/login" nextUrl="/profile"/>);
-        
+    componentDidMount(){
+                 
+    }
+    checkLogState(){
+        return(<AuthPoint successRedirect={"/profile"} failRedirect={false}/>); 
+        /*if(this.state.loggedon){
+            return(<Navigate to="/profile"/>)
+        }*/
     }
     render(){
         return(
@@ -44,8 +50,7 @@ class Login extends React.Component{
                   <input type="text" placeholder="Username" id="userInput" onChange={this.handleInput} required/>
                   <input type="text" placeholder="Password" id="passInput"onChange={this.handleInput} required/>
                   <button onClick={this.login}>Login</button>
-                  {this.checkRedirect()}
-                
+                  {this.checkLogState()}
                 
             </div>
         )
