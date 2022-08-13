@@ -41,8 +41,6 @@ app.use(session({
 
 
 MyDB();
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use("/api/pass", passRouter);
 auth(app, Account);
 routes(app, Account);
