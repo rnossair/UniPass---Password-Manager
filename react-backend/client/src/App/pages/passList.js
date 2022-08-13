@@ -1,5 +1,6 @@
 import React from "react";
 import $ from "jquery";
+import AuthPoint from "./AuthPoint";
 class passList extends React.Component{
     constructor(props){
         super(props);
@@ -21,6 +22,7 @@ class passList extends React.Component{
         this.getPasswords = this.getPasswords.bind(this);
         this.passRender = this.passRender.bind(this);
         this.copyToClipBoard = this.copyToClipBoard.bind(this);
+        this.checkLogState = this.checkLogState.bind(this);
     }
     handleNameInput(e){
         this.setState({nameInput: e.target.value})
@@ -84,6 +86,10 @@ class passList extends React.Component{
         var copyText = document.getElementById(e.currentTarget.id);
         navigator.clipboard.writeText(copyText.textContent);
       }
+     checkLogState(){
+       return(<AuthPoint failRedirect={true}/>); 
+
+    }
     render(){
         
         if(this.state.masterPassword !== ""){
@@ -111,6 +117,7 @@ class passList extends React.Component{
                     return(
 
                         <div id="masterPassSubmit">
+                            {this.checkLogState()}
                             <p>hi</p>
                             <input placeholder="Enter Master Password: " type="text" onChange={this.handleMasterPassInput}></input>
                             <button onClick={this.submitMasterPass}>Submit</button>

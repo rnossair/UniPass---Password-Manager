@@ -39,9 +39,7 @@ class Login extends React.Component{
     }
     checkLogState(){
         return(<AuthPoint successRedirect={"/profile"} failRedirect={false}/>); 
-        /*if(this.state.loggedon){
-            return(<Navigate to="/profile"/>)
-        }*/
+
     }
     render(){
         return(
