@@ -9,6 +9,7 @@ class passList extends React.Component{
             nameInput: "",
             passInput: "",
             masterPassword: "",
+            mpSet: false,
             masterPassInput : "",
             securePass: "",
             gotPass: false
@@ -23,6 +24,7 @@ class passList extends React.Component{
         this.passRender = this.passRender.bind(this);
         this.copyToClipBoard = this.copyToClipBoard.bind(this);
         this.checkLogState = this.checkLogState.bind(this);
+        this.registerMasterPass = this.registerMasterPass.bind(this);
     }
     handleNameInput(e){
         this.setState({nameInput: e.target.value})
@@ -49,7 +51,28 @@ class passList extends React.Component{
           });
     }
     submitMasterPass(){
-        this.setState({masterPassword: this.state.masterPassInput});
+        let mp = this.state.masterPassInput;
+        fetch("/api/mpverify", {method: "POST", headers: {"Content-Type": 'application/json'
+    }, body: JSON.stringify({mp: mp})})
+            .then(res => res.json())
+            .then(obj => {
+                console.log(obj.result);
+                if(obj.result === "Success"){
+                    this.setState({masterPassword: mp})
+                }
+            })
+    }
+    registerMasterPass(){
+        let mp = this.state.masterPassInput;
+        fetch("/api/mpsubmit", {method: "POST", headers: {"Content-Type": 'application/json'
+    }, body: JSON.stringify({mp: mp})})
+            .then(res => res.json())
+            .then(obj => {
+                console.log(obj.result);
+                if(obj.result === "Success"){
+                    this.setState({masterPassword: mp})
+                }
+            })
     }
     submitPassword(){
          let pass = this.state.passInput;
@@ -90,10 +113,27 @@ class passList extends React.Component{
        return(<AuthPoint failRedirect={true}/>); 
 
     }
+    componentDidMount(){
+        if(!this.state.mpSet){
+            fetch("/api/mpGet")
+            .then(res => res.json())
+            .then(obj => {
+                console.log(obj.result)
+                if(obj.result === "Mp set"){
+                    this.setState({mpSet: true});
+                }
+                else{
+                    this.setState({mpSet: false});
+                }
+            })
+        }
+        
+    }
     render(){
         
         if(this.state.masterPassword !== ""){
                     return(<div id="passListContainer">
+                        {this.checkLogState()}
                             <h1>Pass List:</h1>
                         <div id="passList">
                             {this.getPasswords()}
@@ -114,16 +154,28 @@ class passList extends React.Component{
                     )
                 }
                 else{
-                    return(
+                    if(this.state.mpSet){
+                        return(
 
-                        <div id="masterPassSubmit">
-                            {this.checkLogState()}
-                            <p>hi</p>
-                            <input placeholder="Enter Master Password: " type="text" onChange={this.handleMasterPassInput}></input>
-                            <button onClick={this.submitMasterPass}>Submit</button>
-                        </div>
-
-                    )
+                            <div id="masterPassSubmit">
+                                {this.checkLogState()}
+                                <input placeholder="Enter Master Password: " type="text" onChange={this.handleMasterPassInput}></input>
+                                <button onClick={this.submitMasterPass}>Submit</button>
+                            </div>
+    
+                        )
+                    }
+                    else{
+                        return(
+                            <div id="masterPassRegister">
+                                {this.checkLogState()}
+                                <h3>Register a new master password:</h3>
+                                <input placeholder="Master Password: " type="text" onChange={this.handleMasterPassInput}></input>
+                                <button onClick={this.registerMasterPass}>Submit</button>
+                            </div>
+                        )
+                    }
+                    
                 }
         
     }

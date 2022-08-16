@@ -42,7 +42,7 @@ class Register extends React.Component{
     render(){
         return(
             <div className="Register">
-                <p>Yipee!</p>
+                <p>Register</p>
                   <input type="text" placeholder="Username" id="userInput" onChange={this.handleInput} required/>
                   <input type="text" placeholder="Password" id="passInput"onChange={this.handleInput} required/>
                   <button onClick={this.register}>Register Now!</button>

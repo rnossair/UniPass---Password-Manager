@@ -5,7 +5,7 @@ class Home extends Component{
     render(){
         return(
             <div className="App">
-            <h1>Welcome! Website under construction.</h1>
+            <h1>Welcome</h1>
             <Link to={'./gen'}>
               <button variant="raised">
                   Generator

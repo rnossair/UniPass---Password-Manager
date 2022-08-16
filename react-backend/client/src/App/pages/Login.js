@@ -44,7 +44,7 @@ class Login extends React.Component{
     render(){
         return(
             <div className="Login">
-                <p>Yipee!</p>
+                <p>Login</p>
                   <input type="text" placeholder="Username" id="userInput" onChange={this.handleInput} required/>
                   <input type="text" placeholder="Password" id="passInput"onChange={this.handleInput} required/>
                   <button onClick={this.login}>Login</button>

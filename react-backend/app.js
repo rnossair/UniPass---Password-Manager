@@ -15,6 +15,9 @@ const store = new MongoStore({ mongoUrl: process.env.MONGO_URI });
 var passRouter = require("./routes/passGen");
 const Account = require('./models/Account.js');
 const managePass = require('./routes/managePass.js');
+const mpSubmit = require('./routes/mpSubmit.js');
+const mpVerify = require('./routes/mpVerifiy.js');
+const mpGet = require('./routes/mpGet.js');
 
 var app = express();
 
@@ -43,8 +46,9 @@ app.use("/api/pass", passRouter);
 auth(app, Account);
 routes(app, Account);
 managePass(app, Account);
-
-
+mpSubmit(app, Account);
+mpVerify(app, Account);
+mpGet(app, Account);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -21,6 +21,9 @@ class Profile extends React.Component{
             <Link to="/logout">
                 <button>Logout</button>
             </Link>
+            <Link to="/passlist">
+                <button>Manage passwords</button>
+            </Link>
             </div>
             
         )
