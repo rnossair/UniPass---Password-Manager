@@ -9,10 +9,13 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgb(70, 134, 134);
+  background-color: #303B3F;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+#root{
+  width: 100%;
 }

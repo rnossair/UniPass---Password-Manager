@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-.App {
+.passwordGenerator {
   text-align: center;
   display:flex;
   flex-direction:column;
@@ -9,9 +9,8 @@
   border: 2px solid gray;
   background-color: rgb(200, 200, 200);
   border-radius: 25px;
-  position:relative;
-  top: 10vh;
   padding: 2em;
+  width: 40%;
 }
 
 .genButton{

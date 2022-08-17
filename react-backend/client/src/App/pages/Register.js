@@ -1,6 +1,6 @@
 import React from "react";
 import {Navigate} from "react-router-dom";  
-
+import {Link} from "react-router-dom";
 class Register extends React.Component{
     constructor(props){
         super(props);
@@ -46,6 +46,7 @@ class Register extends React.Component{
                   <input type="text" placeholder="Username" id="userInput" onChange={this.handleInput} required/>
                   <input type="text" placeholder="Password" id="passInput"onChange={this.handleInput} required/>
                   <button onClick={this.register}>Register Now!</button>
+                  <p>Already a member? <Link to="/login">Login</Link></p>
                 {this.redirector()}
                 
             </div>

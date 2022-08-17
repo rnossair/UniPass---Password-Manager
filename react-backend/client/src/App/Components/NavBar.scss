@@ -1,0 +1,41 @@
+#title{
+    color:#128C7E;
+    margin-left: 2vh;
+}
+.focusPage{
+    background-color: #128C7E;
+}
+a{
+    color: white;
+}
+#NavBar{
+    position: fixed;
+    width: 100%;
+    background-color:#25D366;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2;
+    padding: 0px;
+    *{
+        max-height: 100%;
+    }
+    #links{
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        padding: 0px;
+        a{
+            width: 20vh;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding: 0px;
+            text-align: center;
+        }
+    }
+}

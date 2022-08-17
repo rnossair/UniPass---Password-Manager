@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.scss';
+import './passGen.scss';
 import { Component } from "react";
 class PassGen extends Component {
   constructor(props){
@@ -35,7 +35,7 @@ class PassGen extends Component {
   }
   render(){
     return (
-    <div className="App">
+    <div className="passwordGenerator">
       <h1>Secure Password Generator</h1>
       <p>Password List:</p>
       {/*console.log("password state: ", typeof(this.state.passwords))*/}
