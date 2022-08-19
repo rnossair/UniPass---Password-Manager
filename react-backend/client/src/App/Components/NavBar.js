@@ -8,12 +8,11 @@ class NavBar extends React.Component{
             logged: false,
             path: "/"
         }
-        this.handleLinkClick = this.handleLinkClick.bind(this)
+        //this.handleLinkClick = this.handleLinkClick.bind(this)
     }
     componentDidMount(){
         let currPath = window.location.pathname;
         if(document.getElementById(currPath)){
-            console.log(document.getElementById(currPath));
             document.getElementById(currPath).classList.add("focusPage");
         } 
         fetch("/api/authCheck")
@@ -29,24 +28,23 @@ class NavBar extends React.Component{
         return;
     }
     componentDidUpdate(prevProvs, prevState){
-        let currPath = window.location.pathname;
         let links = document.getElementsByClassName("Link");
-        if(document.getElementById(currPath)){
+        if(document.getElementById(this.props.path)){
             for(let i = 0; i < links.length; i++){
-                links[i].classList.remove("focusPage")
+                links[i].classList.remove("focusPage");
             }
-            document.getElementById(currPath).classList.add("focusPage");
+            document.getElementById(this.props.path).classList.add("focusPage");
         } 
     }
-    handleLinkClick(){
+    /*handleLinkClick(){
         let currPath = window.location.pathname;
         let links = document.getElementsByClassName("Link");
         for(let i = 0; i < links.length; i++){
-            links[i].classList.remove("focusPage")
+            links[i].classList.remove("focusPage");
         }
         document.getElementById(currPath).classList.add("focusPage");
         this.setState({path: currPath});
-    }
+    }*/
     render(){
         let element; 
             if(this.state.logged){
@@ -61,7 +59,8 @@ class NavBar extends React.Component{
                 <h1 id="title">UniPass</h1>
                 <div id="links">
                     <Link to="/" id="/" onClick={this.handleLinkClick} className="Link"><h2>About</h2></Link>
-                    <Link to="/passList" id="/passList" onClick={this.handleLinkClick} className="Link"><h2>Home</h2></Link>
+                    <Link to="/passlist" id="/passlist" onClick={this.handleLinkClick} className="Link"><h2>Home</h2></Link>
+                    <Link to="/gen" id="/gen" onClick={this.handleLinkClick} className="Link"><h2>Generator</h2></Link>
                     {element}   
                 </div>
             </div>

@@ -13,7 +13,7 @@ class passList extends React.Component{
             masterPassInput : "",
             securePass: "",
             gotPass: false,
-            loaded: false
+            logged: false
         }
         this.handleNameInput = this.handleNameInput.bind(this);
         this.handlePassInput = this.handlePassInput.bind(this);
@@ -24,8 +24,9 @@ class passList extends React.Component{
         this.getPasswords = this.getPasswords.bind(this);
         this.passRender = this.passRender.bind(this);
         this.copyToClipBoard = this.copyToClipBoard.bind(this);
-        this.checkLogState = this.checkLogState.bind(this);
         this.registerMasterPass = this.registerMasterPass.bind(this);
+        this.checkMasterPass = this.checkMasterPass.bind(this);
+        this.checkAuth = this.checkAuth.bind(this); 
     }
     handleNameInput(e){
         this.setState({nameInput: e.target.value})
@@ -110,79 +111,86 @@ class passList extends React.Component{
         var copyText = document.getElementById(e.currentTarget.id);
         navigator.clipboard.writeText(copyText.textContent);
       }
-     checkLogState(){
-       return(<AuthPoint failRedirect={true}/>); 
-
-    }
-    componentDidMount(){
+    checkMasterPass(){
         if(!this.state.mpSet){
             fetch("/api/mpGet")
             .then(res => res.json())
             .then(obj => {
                 console.log(obj.result)
                 if(obj.result === "Mp set"){
-                    this.setState({mpSet: true, loaded: true});
+                    this.setState({mpSet: true});
                 }
                 else{
-                    this.setState({mpSet: false, loaded: true});
+                    this.setState({mpSet: false});
                 }
             })
         }
         
     }
+    checkAuth(){
+        fetch("/api/authCheck")
+        .then(res => res.json())
+        .then(obj => {
+            if(obj.result === "Approved"){
+                this.setState({logged: true});
+            }
+        })
+    }
     render(){
-        
-        if(this.state.masterPassword !== ""){
-                    return(<div id="passListContainer">
-                        {this.checkLogState()}
-                            <h1>Pass List:</h1>
-                        <div id="passList">
-                            {this.getPasswords()}
-                            <ul className="passContainer">
-                                {this.passRender()}
-                            </ul>
+        if(!this.state.logged){
+            this.checkAuth();
+        }
+        if(this.state.logged){
+            this.checkMasterPass();
+            if(this.state.masterPassword !== ""){
+                return(<div id="passListContainer">
+                        <h1>Pass List:</h1>
+                    <div id="passList">
+                        {this.getPasswords()}
+                        <ul className="passContainer">
+                            {this.passRender()}
+                        </ul>
+                    </div>
+                    <div id="registerPass">
+                         <h4>Add new password:</h4>
+                         <div className="inputContainer">
+                              <input type="text" placeholder="Website/Service" onChange={this.handleNameInput}></input>
+                              <input type="text" placeholder="Password" onChange={this.handlePassInput} id="passInput"></input>
+                              <button onClick={this.generatePassword}>Generate Secure Password</button>
+                              <button onClick={this.submitPassword}>Submit</button>
+                    </div>
+                 </div>
                         </div>
-                        <div id="registerPass">
-                             <h4>Add new password:</h4>
-                             <div className="inputContainer">
-                                  <input type="text" placeholder="Website/Service" onChange={this.handleNameInput}></input>
-                                  <input type="text" placeholder="Password" onChange={this.handlePassInput} id="passInput"></input>
-                                  <button onClick={this.generatePassword}>Generate Secure Password</button>
-                                  <button onClick={this.submitPassword}>Submit</button>
-                        </div>
-                     </div>
+                )
+            }
+            else{
+                    if(this.state.mpSet){
+                        return(
+
+                            <div id="masterPassSubmit">
+                                <h3>Enter your master password:</h3>
+                                <input placeholder="Enter Master Password: " type="text" onChange={this.handleMasterPassInput}></input>
+                                <button onClick={this.submitMasterPass}>Submit</button>
                             </div>
-                    )
-                }
-                else{
-                    if(this.state.loaded){
-                        if(this.state.mpSet){
-                            return(
     
-                                <div id="masterPassSubmit">
-                                    {this.checkLogState()}
-                                    <input placeholder="Enter Master Password: " type="text" onChange={this.handleMasterPassInput}></input>
-                                    <button onClick={this.submitMasterPass}>Submit</button>
-                                </div>
-        
-                            )
-                        }
-                        else{
-                            return(
-                                <div id="masterPassRegister">
-                                    {this.checkLogState()}
-                                    <h3>Register a new master password:</h3>
-                                    <input placeholder="Master Password: " type="text" onChange={this.handleMasterPassInput}></input>
-                                    <button onClick={this.registerMasterPass}>Submit</button>
-                                </div>
-                            )
-                        }
+                        )
                     }
                     else{
-                        return(<h3>Loading...</h3>)
+                        return(
+                            <div id="masterPassRegister">
+                                <h3>Register a new master password:</h3>
+                                <input placeholder="Master Password: " type="text" onChange={this.handleMasterPassInput}></input>
+                                <button onClick={this.registerMasterPass}>Submit</button>
+                            </div>
+                        )
                     }
-                    
-                }
+            }
+                
+    
+        }
+        else{
+            return(<h3>Loading...<AuthPoint failRedirect={true}/></h3>)
+        }
         
     }
 }
