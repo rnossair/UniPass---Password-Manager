@@ -17,7 +17,7 @@ function AuthPoint({successRedirect, failRedirect}){
                 if(!failRedirect){
                     return;
                 }
-                navigate('/login');
+                navigate('/register');
             }
 
         })

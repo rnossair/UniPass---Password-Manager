@@ -10,7 +10,6 @@ class Login extends React.Component{
         }
         this.handleInput = this.handleInput.bind(this);
         this.login = this.login.bind(this);
-        this.checkLogState = this.checkLogState.bind(this);
     }
     handleInput(e){
         let elmId = e.currentTarget.id;
@@ -32,13 +31,6 @@ class Login extends React.Component{
             })
 
     }
-    componentDidMount(){
-                 
-    }
-    checkLogState(){
-        return(<AuthPoint successRedirect={"/profile"} failRedirect={false}/>); 
-
-    }
     render(){
         return(
             <div className="Login">
@@ -46,7 +38,7 @@ class Login extends React.Component{
                   <input type="text" placeholder="Username" id="userInput" onChange={this.handleInput} required/>
                   <input type="text" placeholder="Password" id="passInput"onChange={this.handleInput} required/>
                   <button onClick={this.login}>Login</button>
-                  {this.checkLogState()}
+                  <AuthPoint successRedirect={"/profile"} failRedirect={false}/>
                 
             </div>
         )

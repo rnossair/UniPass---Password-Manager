@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect} from 'react';
 import "./App.scss";
 import Home from "./pages/Home";
 import { Route, Routes} from 'react-router-dom';
@@ -10,11 +10,21 @@ import Login from './pages/Login';
 import PassList from "./pages/passList";
 import Profile from './pages/profile';
 import NavBar from './Components/NavBar';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 export default function App() {
+    let path = window.location.pathname;
+    if(path === "/login"){
+      path = "/register";
+    }
+    const location = useLocation();
+    useEffect(() => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      path = window.location.pathname;
+    }, [location])
+
     return (
       <div id="App">
-      <NavBar/>
+      <NavBar path={path}/>
       <div id="content">
       <Routes>
         <Route exact path="/" element={<Home  />}/>
