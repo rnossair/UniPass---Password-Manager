@@ -144,9 +144,9 @@ class passList extends React.Component {
         }
 
     }
-    mpError(){
-        if(this.state.mpassError){
-            return(<div id="mpassError">
+    mpError() {
+        if (this.state.mpassError) {
+            return (<div id="mpassError">
                 <p>Error: MasterPassword incorrect</p>
             </div>)
         }

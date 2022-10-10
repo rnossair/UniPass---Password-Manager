@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 .passwordGenerator {
   text-align: center;
-  display:flex;
-  flex-direction:column;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   font-family: Roboto;
@@ -13,26 +14,28 @@
   width: 40%;
 }
 
-.genButton{
+.genButton {
   border-radius: 20px;
 }
-.submit{
-    display:flex;
-    flex-direction: column;
+
+.submit {
+  display: flex;
+  flex-direction: column;
   background-color: #50d890;
   border: 2px solid limegreen;
-  width:10em; 
-  padding:2em;
+  width: 10em;
+  padding: 2em;
   border-radius: 10px;
   column-gap: 0.5em;
 }
-.passwordContainer{
-  display:flex;
+
+.passwordContainer {
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   overflow: auto;
-  height:15em;
+  height: 15em;
   border: 3px solid gray;
   background-color: #F0ECE3;
   border-radius: 13px;
@@ -40,24 +43,27 @@
   margin-bottom: 1em;
   max-width: fit-content;
 }
-  .passwordContainer::-webkit-scrollbar{
-  border-radius:25px;
-  width:1em;
-  background-color:   rgb(170, 170, 170);
+
+.passwordContainer::-webkit-scrollbar {
+  border-radius: 25px;
+  width: 1em;
+  background-color: rgb(170, 170, 170);
   box-sizing: border-box;
   background-clip: border-box;
   border: 2px solid gray;
 }
-.passwordContainer::-webkit-scrollbar-thumb{
+
+.passwordContainer::-webkit-scrollbar-thumb {
   background-color: #12CAD6;
   border: 2px solid gray;
   border-radius: 25px;
 }
-.password{
+
+.password {
   border: 3px solid #12CAD6;
   background-color: #05a5b1;
   color: white;
- // width: 14em;
+  // width: 14em;
   margin: 0.5em;
   border-radius: 10px;
   animation-duration: 0.5s;
@@ -65,33 +71,43 @@
   font-family: Roboto;
   font-weight: 600;
 }
-.password:hover{
+
+.password:hover {
   animation-duration: 0.5s;
   animation-name: buttonAnimIn;
   animation-fill-mode: forwards;
 }
-.password:active{
+
+.password:active {
   background-color: white !important;
 }
-input{
+
+input {
   border: 2px solid rgb(31, 139, 22);
   border-radius: 10px;
   margin-bottom: 1em;
 }
+
 @keyframes buttonAnimIn {
-  
-  100%{transform: scale(1.25);
-  background-color: #12CAD6;
-box-shadow: 1px 2px 4px gray;}
-}
-@keyframes buttonAnimOut {
-  0%{transform: scale(1.25);
+
+  100% {
+    transform: scale(1.25);
     background-color: #12CAD6;
-    box-shadow: 1px 2px 4px gray;}
-  100%{
+    box-shadow: 1px 2px 4px gray;
+  }
+}
+
+@keyframes buttonAnimOut {
+  0% {
+    transform: scale(1.25);
+    background-color: #12CAD6;
+    box-shadow: 1px 2px 4px gray;
+  }
+
+  100% {
     transform: scale(1);
     background-color: #05a5b1;
     box-shadow: 1px 1px 1px gray;
   }
-  
+
 }
