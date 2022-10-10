@@ -48,8 +48,8 @@ class Login extends React.Component {
             <div className="Login">
                 <p>Login</p>
                 {this.loginErr()}
-                <input type="text" placeholder="Username" id="userInput" onChange={this.handleInput} required />
-                <input type="text" placeholder="Password" id="passInput" onChange={this.handleInput} required />
+                <input type="password" placeholder="Username" id="userInput" onChange={this.handleInput} required />
+                <input type="password" placeholder="Password" id="passInput" onChange={this.handleInput} required />
                 <button onClick={this.login}>Login</button>
                 <AuthPoint successRedirect={"/profile"} failRedirect={false} />
 

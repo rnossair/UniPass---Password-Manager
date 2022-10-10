@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+.Home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Ubuntu";
+    width: 100%;
+    height: 100%;
+    p{
+        font-size: 1.2em;
+    }
+    li{
+        margin: 1em;
+    }
+    .diag{
+        position: absolute;
+        
+        z-index: 2;
+        opacity: 0.2;
+        width: 100%;
+        height: 41vh;
+        background-image: radial-gradient(#22a6b3 4px, transparent 4px), radial-gradient(#22a6b3 4px, #303B3F 4px);
+        background-size: 100px 100px;
+        background-position: 0 0,50px 50px;
+    }
+    #title {
+        display: flex;
+        width: 100%;
+        height:41vh;
+        background-color: #242b2e;
+    }
+
+    button {
+        font-family: "Ubuntu";
+        font-size: 1.5em;
+        border-radius: 1em;
+        background-color: #22a6b3;
+        color: white;
+    }
+
+    button:hover {
+        background-color: #7ed6df;
+    }
+
+    div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        h1 {
+            text-align: center;
+            width: 70%;
+            font-size: 3em;
+        }
+    }
+
+
+}

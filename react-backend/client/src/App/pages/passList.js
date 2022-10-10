@@ -198,7 +198,7 @@ class passList extends React.Component {
                         <div id="masterPassSubmit">
                             <h3>Enter your master password:</h3>
                             {this.mpError()}
-                            <input placeholder="Enter Master Password: " type="text" onChange={this.handleMasterPassInput}></input>
+                            <input placeholder="Enter Master Password: " type="password"onChange={this.handleMasterPassInput}></input>
                             <button onClick={this.submitMasterPass}>Submit</button>
                         </div>
 
@@ -208,7 +208,7 @@ class passList extends React.Component {
                     return (
                         <div id="masterPassRegister">
                             <h3>Register a new master password:</h3>
-                            <input placeholder="Master Password: " type="text" onChange={this.handleMasterPassInput}></input>
+                            <input placeholder="Master Password: " type="password" onChange={this.handleMasterPassInput}></input>
                             <button onClick={this.registerMasterPass}>Submit</button>
                         </div>
                     )
