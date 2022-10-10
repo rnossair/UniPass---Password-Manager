@@ -14,7 +14,8 @@ class passList extends React.Component {
             securePass: "",
             gotPass: false,
             logged: false,
-            mpassError: false
+            mpassError: false,
+            loaded: false
         }
         this.handleNameInput = this.handleNameInput.bind(this);
         this.handlePassInput = this.handlePassInput.bind(this);
@@ -129,16 +130,16 @@ class passList extends React.Component {
         navigator.clipboard.writeText(copyText.textContent);
     }
     checkMasterPass() {
-        if (!this.state.mpSet) {
+        if (!this.state.mpSet && !this.state.loaded) {
             fetch("/api/mpGet")
                 .then(res => res.json())
                 .then(obj => {
                     console.log(obj.result)
                     if (obj.result === "Mp set") {
-                        this.setState({ mpSet: true });
+                        this.setState({ mpSet: true , loaded: true});
                     }
                     else {
-                        this.setState({ mpSet: false });
+                        this.setState({ mpSet: false, loaded: false });
                     }
                 })
         }
@@ -188,6 +189,9 @@ class passList extends React.Component {
                 )
             }
             else {
+                if(!this.state.loaded){
+                    return(<h3>Loading...</h3>)
+                }
                 if (this.state.mpSet) {
                     return (
 
