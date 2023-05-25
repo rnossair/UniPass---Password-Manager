@@ -24,6 +24,7 @@ var app = express();
 app.use(cors({
   credentials: true,
   origin: 'https://unipassv2.vercel.app',
+  exposedHeaders: 'Content-Range,X-Content-Range'
 }));
 app.set('trust proxy', 1);
 
@@ -40,7 +41,7 @@ app.use(session({
   store: store,
   key: "express.sid",
   proxy: true,
-  cookie: { secure: true }
+  cookie: { secure: true, sameSite: "none"}
 }));
 
 
