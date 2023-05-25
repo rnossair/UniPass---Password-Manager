@@ -8,7 +8,7 @@ function AuthPoint({successRedirect, failRedirect}){
 
             
             if(obj.result === "Approved"){
-                if(succesRedirect){
+                if(successRedirect){
                     navigate(succesRedirect);
                 }
                 return;
