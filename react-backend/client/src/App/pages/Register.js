@@ -23,7 +23,7 @@ class Register extends React.Component {
     }
     register() {
         fetch("https://password-manager-server.vercel.app/api/register", {
-            method: "POST",credentials: 'include' headers: {
+            method: "POST",credentials: 'include', headers: {
                 'Content-Type': 'application/json',
             }, body: JSON.stringify({ username: this.state.username, password: this.state.password })
         })
