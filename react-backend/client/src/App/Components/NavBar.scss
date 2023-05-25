@@ -1,17 +1,16 @@
-#title{
-    color:#128C7E;
-    margin-left: 2vh;
+.focusPage {
+    background-color: #22a6b3;
 }
-.focusPage{
-    background-color: #128C7E;
-}
-a{
+
+a {
     color: white;
 }
-#NavBar{
+
+#NavBar {
     position: fixed;
     width: 100%;
-    background-color:#25D366;
+    background-color: #25D366;
+    border-bottom: 1vh solid #2bb45d;
     height: 10vh;
     display: flex;
     flex-direction: row;
@@ -19,16 +18,19 @@ a{
     align-items: center;
     z-index: 2;
     padding: 0px;
-    *{
+
+    * {
         max-height: 100%;
     }
-    #links{
+
+    #links {
         height: 100%;
         display: flex;
         flex-direction: row;
         justify-content: center;
         padding: 0px;
-        a{
+
+        a {
             width: 20vh;
             display: flex;
             flex-direction: row;

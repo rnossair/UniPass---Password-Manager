@@ -56,7 +56,7 @@ class NavBar extends React.Component{
        
         return(
             <div id="NavBar">
-                <h1 id="title">UniPass</h1>
+                <h1 style={{"color": "#128C7E", "marginLeft": "2vh"}}>UniPass</h1>
                 <div id="links">
                     <Link to="/" id="/" onClick={this.handleLinkClick} className="Link"><h2>About</h2></Link>
                     <Link to="/passlist" id="/passlist" onClick={this.handleLinkClick} className="Link"><h2>Home</h2></Link>
