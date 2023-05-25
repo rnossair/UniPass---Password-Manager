@@ -50,6 +50,9 @@ mpSubmit(app, Account);
 mpVerify(app, Account);
 mpGet(app, Account);
 
+app.get("/", (req ,res) => {
+  res.send("hi")
+})
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
