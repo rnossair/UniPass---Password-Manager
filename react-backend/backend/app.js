@@ -2,6 +2,7 @@ require('dotenv').config();
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+const cors = require('cors')
 var cookieParser = require('cookie-parser');
 var bodyParser = require("body-parser");
 var logger = require('morgan');
@@ -20,7 +21,7 @@ const mpVerify = require('./routes/mpVerifiy.js');
 const mpGet = require('./routes/mpGet.js');
 
 var app = express();
-
+app.use(cors());
 
 app.use(logger('dev'));
 app.use(express.json());
