@@ -41,6 +41,9 @@ function managePass(app, Account){
         })
         
     })
+    app.get("/hi", (req, res) => {
+        res.json({message: "hi"})
+    })
 }
 
 module.exports = managePass;
