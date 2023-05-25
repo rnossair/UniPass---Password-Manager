@@ -38,7 +38,7 @@ app.use(session({
   saveUninitialized: true,
   store: store,
   key: "express.sid",
-  cookie: { secure: true, sameSite: 'none', }
+  cookie: { secure: true, sameSite: 'none' }
 }));
 
 
