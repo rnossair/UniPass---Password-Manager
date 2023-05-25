@@ -23,7 +23,7 @@ const mpGet = require('./routes/mpGet.js');
 var app = express();
 app.use(cors({
   credentials: true,
-  origin: 'https://unipassv2.vercel.app/',
+  origin: 'https://unipassv2.vercel.app',
 }));
 
 app.use(logger('dev'));
