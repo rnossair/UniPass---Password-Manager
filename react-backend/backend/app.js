@@ -21,7 +21,10 @@ const mpVerify = require('./routes/mpVerifiy.js');
 const mpGet = require('./routes/mpGet.js');
 
 var app = express();
-app.use(cors());
+app.use(cors({
+  credentials: true,
+  origin: 'https://unipassv2.vercel.app/',
+}));
 
 app.use(logger('dev'));
 app.use(express.json());
