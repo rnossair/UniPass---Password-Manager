@@ -50,19 +50,19 @@ mpSubmit(app, Account);
 mpVerify(app, Account);
 mpGet(app, Account);
 
-app.get("/", (req ,res) => {
+/*app.get("/", (req ,res) => {
   res.send("hi")
-})
+})*/
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+/*app.use(function(req, res, next) {
   next(createError(404));
-});
+});*/
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, (req, res) => {
     console.log(`app is listening to PORT ${PORT}`)
 })
 
-process.on('warning', e => console.warn(e.stack));
+//process.on('warning', e => console.warn(e.stack));
 // error handler
 /*app.use(function(err, req, res, next) {
   // set locals, only providing error in development
