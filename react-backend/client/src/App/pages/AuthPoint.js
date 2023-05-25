@@ -2,7 +2,7 @@ import {useNavigate} from "react-router-dom";
 function AuthPoint({successRedirect, failRedirect}){
     let navigate = useNavigate();
     function checkAuth(succesRedirect, failRedirect) {
-        fetch("https://password-manager-server.vercel.app/api/authCheck",{ method: "GET"})
+        fetch("https://password-manager-server.vercel.app/api/authCheck",{ method: "GET",credentials: 'include'})
         .then(res => res.json())
         .then(obj => {
             console.log(obj)
