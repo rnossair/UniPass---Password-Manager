@@ -40,7 +40,7 @@ app.use(session({
   store: store,
   key: "express.sid",
   proxy: true,
-  cookie: { secure: false, sameSite: 'none' }
+  cookie: { secure: true }
 }));
 
 
