@@ -5,7 +5,7 @@ function AuthPoint({successRedirect, failRedirect}){
         fetch("https://password-manager-server.vercel.app/api/authCheck",{ method: "GET"})
         .then(res => res.json())
         .then(obj => {
-
+            console.log(obj)
             
             if(obj.result === "Approved"){
                 if(successRedirect){
