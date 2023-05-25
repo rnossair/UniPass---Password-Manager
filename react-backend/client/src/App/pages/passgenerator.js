@@ -21,7 +21,7 @@ class PassGen extends Component {
   }
   getPasswords(count, length) {
     fetch("https://password-manager-server.vercel.app/api/pass", {
-      method: "POST", headers: {
+      method: "POST",credentials: 'include' , headers: {
         'Content-Type': 'application/json',
       }, body: JSON.stringify({ count: count, passLength: length })
     })
