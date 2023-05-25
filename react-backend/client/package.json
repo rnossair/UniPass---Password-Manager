@@ -20,7 +20,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:3001",
+  "proxy": "https://password-manager-server.vercel.app/",
   "eslintConfig": {
     "extends": [
       "react-app",
