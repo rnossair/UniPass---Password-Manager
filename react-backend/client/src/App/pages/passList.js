@@ -46,7 +46,7 @@ class passList extends React.Component {
         this.setState({ masterPassInput: e.target.value })
     }
     generatePassword() {
-        fetch("/api/pass", {
+        fetch("https://password-manager-server.vercel.app/api/pass", {
             method: "POST", headers: {
                 'Content-Type': 'application/json',
             }, body: JSON.stringify({ count: 1, passLength: 18 })
@@ -59,7 +59,7 @@ class passList extends React.Component {
     }
     submitMasterPass() {
         let mp = this.state.masterPassInput;
-        fetch("/api/mpverify", {
+        fetch("https://password-manager-server.vercel.app/api/mpverify", {
             method: "POST", headers: {
                 "Content-Type": 'application/json'
             }, body: JSON.stringify({ mp: mp })
@@ -77,7 +77,7 @@ class passList extends React.Component {
     }
     registerMasterPass() {
         let mp = this.state.masterPassInput;
-        fetch("/api/mpsubmit", {
+        fetch("https://password-manager-server.vercel.app/api/mpsubmit", {
             method: "POST", headers: {
                 "Content-Type": 'application/json'
             }, body: JSON.stringify({ mp: mp })
@@ -97,7 +97,7 @@ class passList extends React.Component {
             console.log("missing pass/name");
         }
         else {
-            fetch("/api/submitPass", {
+            fetch("https://password-manager-server.vercel.app/api/submitPass", {
                 method: "POST", headers: {
                     'Content-Type': 'application/json',
                 }, body: JSON.stringify({ masterPass: this.state.masterPassword, pass: pass, name: name })
@@ -107,7 +107,7 @@ class passList extends React.Component {
     }
     getPasswords() {
         if (!this.state.gotPass) {
-            fetch("/api/getPass", {
+            fetch("https://password-manager-server.vercel.app/api/getPass", {
                 method: "POST", headers: {
                     'Content-Type': 'application/json',
                 }, body: JSON.stringify({ masterPass: this.state.masterPassword })
@@ -131,7 +131,7 @@ class passList extends React.Component {
     }
     checkMasterPass() {
         if (!this.state.mpSet && !this.state.loaded) {
-            fetch("/api/mpGet")
+            fetch("https://password-manager-server.vercel.app/api/mpGet")
                 .then(res => res.json())
                 .then(obj => {
                     console.log(obj.result)
@@ -153,7 +153,7 @@ class passList extends React.Component {
         }
     }
     checkAuth() {
-        fetch("/api/authCheck")
+        fetch("https://password-manager-server.vercel.app/api/authCheck")
             .then(res => res.json())
             .then(obj => {
                 if (obj.result === "Approved") {

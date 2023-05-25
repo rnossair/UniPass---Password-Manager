@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 function Logoff() {
     let navigate = useNavigate();
     function checkLogOut() {
-        fetch("/api/logout", { method: "GET" })
+        fetch("https://password-manager-server.vercel.app/api/logout", { method: "GET" })
             .then(res => res.json())
             .then(obj => {
                 if (obj.result === "Logged out") {

@@ -6,7 +6,7 @@ class Profile extends React.Component {
         this.state = { username: "-" }
     }
     componentDidMount() {
-        fetch("/api/getUser", { method: "GET" })
+        fetch("https://password-manager-server.vercel.app/api/getUser", { method: "GET" })
             .then(res => res.json())
             .then(obj => {
                 if (!obj.error) {
