@@ -1,5 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import AuthPoint from "./AuthPoint";
+import "./auth.scss";
 class Login extends React.Component {
     constructor(props) {
         super(props);
@@ -41,7 +43,7 @@ class Login extends React.Component {
     }
     loginErr() {
         if (this.state.loginfail) {
-            return (<div id="loginfail"><p>Error: Username or password is incorrect</p></div>)
+            return (<div className="notice notice-error">Username or password is incorrect.</div>)
         }
     }
     componentDidMount() {
@@ -58,26 +60,34 @@ class Login extends React.Component {
     }
     render() {
         if (this.state.loggedon) {
-            return (<div>
-                <h3>Logged in, redirecting...</h3>
-                <AuthPoint successRedirect={"/profile"} failRedirect={false} />
-            </div>
+            return (
+                <div className="auth-status">
+                    <h3>You're in — opening your vault…</h3>
+                    <AuthPoint successRedirect={"/profile"} failRedirect={false} />
+                </div>
             )
         }
         if (this.state.authCheck) {
             return (
-                <div className="Login">
-                    <p>Login</p>
+                <div className="auth card">
+                    <span className="eyebrow">Welcome back</span>
+                    <h2>Open your vault</h2>
                     {this.loginErr()}
-                    <input type="password" placeholder="Username" id="userInput" onChange={this.handleInput} required />
-                    <input type="password" placeholder="Password" id="passInput" onChange={this.handleInput} required />
-                    <button onClick={this.login}>Login</button>
-
+                    <label className="field">
+                        <span>Username</span>
+                        <input type="text" placeholder="yourname" id="userInput" autoComplete="username" onChange={this.handleInput} required />
+                    </label>
+                    <label className="field">
+                        <span>Password</span>
+                        <input type="password" placeholder="Your password" id="passInput" autoComplete="current-password" onChange={this.handleInput} required />
+                    </label>
+                    <button className="btn-primary btn-block" onClick={this.login}>Log in</button>
+                    <p className="auth-alt">New here? <Link to="/register">Create an account</Link></p>
                 </div>
             )
         }
         else {
-            return (<h3>Loading...</h3>)
+            return (<div className="auth-status"><h3>Loading…</h3></div>)
         }
     }
 }

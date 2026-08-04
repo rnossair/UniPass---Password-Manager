@@ -1,113 +1,69 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-
 .passwordGenerator {
-  text-align: center;
+  width: 100%;
+  max-width: 720px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: Roboto;
-  border: 2px solid gray;
-  background-color: rgb(200, 200, 200);
-  border-radius: 25px;
-  padding: 2em;
-  width: 40%;
+  gap: 1.5rem;
 }
 
-.genButton {
-  border-radius: 20px;
+.gen-head { text-align: left; }
+.gen-head h1 {
+  font-size: clamp(1.7rem, 5vw, 2.4rem);
+  margin: 0.4rem 0 0.25rem;
+}
+.gen-head p { margin: 0; }
+
+.gen-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 0.9fr;
+  gap: 1.25rem;
+  align-items: start;
 }
 
-.submit {
-  display: flex;
-  flex-direction: column;
-  background-color: #50d890;
-  border: 2px solid limegreen;
-  width: 10em;
-  padding: 2em;
-  border-radius: 10px;
-  column-gap: 0.5em;
-}
-
+/* generated passwords */
 .passwordContainer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  overflow: auto;
-  height: 15em;
-  border: 3px solid gray;
-  background-color: #F0ECE3;
-  border-radius: 13px;
-  padding: 2em;
-  margin-bottom: 1em;
-  max-width: fit-content;
+  gap: 0.6rem;
+  max-height: 46vh;
+  overflow-y: auto;
+  padding: 1rem;
 }
-
-.passwordContainer::-webkit-scrollbar {
-  border-radius: 25px;
-  width: 1em;
-  background-color: rgb(170, 170, 170);
-  box-sizing: border-box;
-  background-clip: border-box;
-  border: 2px solid gray;
+.passwordContainer .secret {
+  text-align: left;
+  font-size: 1rem;
 }
-
+.passwordContainer::-webkit-scrollbar { width: 10px; }
 .passwordContainer::-webkit-scrollbar-thumb {
-  background-color: #12CAD6;
-  border: 2px solid gray;
-  border-radius: 25px;
+  background: var(--surface-3);
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--surface);
 }
 
-.password {
-  border: 3px solid #12CAD6;
-  background-color: #05a5b1;
-  color: white;
-  // width: 14em;
-  margin: 0.5em;
-  border-radius: 10px;
-  animation-duration: 0.5s;
-  animation-name: buttonAnimOut;
-  font-family: Roboto;
+/* controls */
+.submit {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  position: sticky;
+  top: calc(var(--nav-h) + 1.5rem);
+}
+.submit .field > span {
+  font-size: 0.8rem;
   font-weight: 600;
+  color: var(--text-muted);
 }
+.submit input { text-align: center; }
+.genButton { margin-top: 0.25rem; }
 
-.password:hover {
-  animation-duration: 0.5s;
-  animation-name: buttonAnimIn;
-  animation-fill-mode: forwards;
+.gen-status {
+  margin-top: 4rem;
+  text-align: center;
 }
+.gen-status h1 { color: var(--text-muted); font-weight: 500; font-size: 1.5rem; }
 
-.password:active {
-  background-color: white !important;
-}
-
-input {
-  border: 2px solid rgb(31, 139, 22);
-  border-radius: 10px;
-  margin-bottom: 1em;
-}
-
-@keyframes buttonAnimIn {
-
-  100% {
-    transform: scale(1.25);
-    background-color: #12CAD6;
-    box-shadow: 1px 2px 4px gray;
-  }
-}
-
-@keyframes buttonAnimOut {
-  0% {
-    transform: scale(1.25);
-    background-color: #12CAD6;
-    box-shadow: 1px 2px 4px gray;
-  }
-
-  100% {
-    transform: scale(1);
-    background-color: #05a5b1;
-    box-shadow: 1px 1px 1px gray;
-  }
-
+@media (max-width: 680px) {
+  .gen-grid { grid-template-columns: 1fr; }
+  .submit { position: static; order: -1; }
 }

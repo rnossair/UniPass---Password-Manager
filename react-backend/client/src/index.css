@@ -1,21 +1,94 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  display:flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #303B3F;
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap');
+
+/* ========================================================================
+   UniPass design tokens — one source of truth for every screen.
+   Concept: a "vault". Deep blue-slate surfaces, one emerald-teal accent,
+   monospace for secrets, and a red->amber->emerald spectrum for strength.
+   ======================================================================== */
+:root {
+  /* surfaces */
+  --bg: #0b0f14;
+  --bg-grid: rgba(43, 217, 166, 0.06);
+  --surface: #151d28;
+  --surface-2: #1b2531;
+  --surface-3: #212d3b;
+  --bg-elev: #10161f;
+
+  /* lines */
+  --line: rgba(255, 255, 255, 0.08);
+  --line-strong: rgba(255, 255, 255, 0.16);
+
+  /* text */
+  --text: #e8eef5;
+  --text-muted: #93a1b0;
+  --text-faint: #66727f;
+
+  /* brand */
+  --accent: #2bd9a6;
+  --accent-strong: #17b98c;
+  --accent-ink: #04150f;
+  --cyan: #38cfe0;
+
+  /* semantic (also the strength spectrum) */
+  --danger: #ff6b6b;
+  --warn: #ffb454;
+  --ok: #2bd9a6;
+
+  /* geometry */
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-pill: 999px;
+  --shadow: 0 18px 50px -20px rgba(0, 0, 0, 0.75);
+  --shadow-sm: 0 6px 20px -10px rgba(0, 0, 0, 0.6);
+  --ring: 0 0 0 3px rgba(43, 217, 166, 0.35);
+
+  /* layout */
+  --maxw: 1080px;
+  --nav-h: 68px;
+  --pad: clamp(1rem, 4vw, 2.5rem);
+
+  /* type */
+  --font-display: "Space Grotesk", system-ui, -apple-system, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
-#root{
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  color: var(--text);
+  background-color: var(--bg);
+  /* faint vault grid — the accent bleeding through the dark */
+  background-image:
+    linear-gradient(var(--bg-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bg-grid) 1px, transparent 1px),
+    radial-gradient(1200px 600px at 50% -10%, rgba(43, 217, 166, 0.08), transparent 60%);
+  background-size: 48px 48px, 48px 48px, 100% 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
   width: 100%;
+}
+
+code,
+kbd {
+  font-family: var(--font-mono);
+}
+
+::selection {
+  background: rgba(43, 217, 166, 0.28);
+  color: #fff;
 }

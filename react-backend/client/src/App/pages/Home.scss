@@ -1,61 +1,118 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
-
 .Home {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: "Ubuntu";
-    width: 100%;
-    height: 100%;
-    p{
-        font-size: 1.2em;
-    }
-    li{
-        margin: 1em;
-    }
-    .diag{
-        position: absolute;
-        pointer-events: none;
-        z-index: 2;
-        opacity: 0.2;
-        width: 100%;
-        height: 41vh;
-        background-image: radial-gradient(#22a6b3 4px, transparent 4px), radial-gradient(#22a6b3 4px, #303B3F 4px);
-        background-size: 100px 100px;
-        background-position: 0 0,50px 50px;
-    }
-    #title {
-        display: flex;
-        width: 100%;
-        height:41vh;
-        background-color: #242b2e;
-    }
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.5rem, 6vw, 4.5rem);
+}
 
-    button {
-        z-index: 2;
-        font-family: "Ubuntu";
-        font-size: 1.5em;
-        border-radius: 1em;
-        background-color: #22a6b3;
-        color: white;
-    }
+/* ---- hero ------------------------------------------------------------- */
+.Home .hero {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(1.5rem, 5vw, 3.5rem);
+  align-items: center;
+  padding-top: clamp(1rem, 4vw, 2.5rem);
+}
 
-    button:hover {
-        background-color: #7ed6df;
-    }
+.Home .hero-copy h1 {
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  margin: 0.6rem 0 1rem;
+}
 
-    div {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+.Home .lede {
+  font-size: clamp(1.02rem, 1.6vw, 1.2rem);
+  color: var(--text-muted);
+  max-width: 42ch;
+}
 
-        h1 {
-            text-align: center;
-            width: 70%;
-            font-size: 3em;
-        }
-    }
+.Home .hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+.Home .hero-cta button { font-size: 1rem; padding: 0.85rem 1.5rem; }
 
+/* ---- signature vault demo -------------------------------------------- */
+.Home .vault-demo {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+.Home .vault-demo-head {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.Home .vault-demo-head .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--surface-3);
+}
+.Home .vault-demo-title {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.Home .demo-secret {
+  font-size: 1.15rem;
+  letter-spacing: 0.25em;
+  cursor: default;
+}
+.Home .demo-secret::after { content: none; }
 
+.Home .strength {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+}
+.Home .strength-label { color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.12em; }
+.Home .strength-value { color: var(--accent); font-weight: 600; }
+
+/* the strength spectrum — the subject-true signal */
+.Home .strength-bar {
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-2);
+  overflow: hidden;
+}
+.Home .strength-bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--danger), var(--warn) 45%, var(--ok));
+  animation: fill 1.1s ease-out both;
+}
+@keyframes fill { from { width: 0 !important; } }
+
+/* ---- feature cards ---------------------------------------------------- */
+.Home .features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+.Home .feature {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.Home .feature-num {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+}
+.Home .feature h3 { font-size: 1.2rem; margin: 0.3rem 0 0.1rem; }
+.Home .feature p { margin: 0; font-size: 0.95rem; }
+
+/* ---- responsive ------------------------------------------------------- */
+@media (max-width: 860px) {
+  .Home .hero { grid-template-columns: 1fr; }
+  .Home .vault-demo { order: -1; }
+  .Home .features { grid-template-columns: 1fr; }
 }

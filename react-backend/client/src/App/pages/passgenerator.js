@@ -41,24 +41,37 @@ class PassGen extends Component {
     }
     if (this.state.loaded) {
       return (
-        <div className="passwordGenerator">
-          <h1>Secure Password Generator</h1>
-          <p>Password List:</p>
-          {/*console.log("password state: ", typeof(this.state.passwords))*/}
-          <div className='passwordContainer'>{this.state.passwords.map((password, i) => <button key={i} id={"pass-" + i} className="password" onClick={this.copyToClipBoard}>{password}</button>)}</div>
-          <div className="submit">
-            <p>Number of passwords to generate:</p>
-            <input type="number" min="1" max="20" placeholder="5" style={{ "textAlign": "center" }} onChange={this.handleNumberInput}></input>
-            <p>Length of passwords:</p>
-            <input type="number" min="6" max="20" placeholder="12" style={{ "textAlign": "center" }} onChange={this.handleLengthInput}></input>
-            <button onClick={() => this.getPasswords(this.state.numInput, this.state.lengthInput)} className="genButton">Generate New Passwords</button>
-          </div>
+        <div className="passwordGenerator container">
+          <header className="gen-head">
+            <span className="eyebrow">Generator</span>
+            <h1>Secure password generator</h1>
+            <p>Fresh, high-entropy passwords. Tap one to copy it.</p>
+          </header>
 
+          <div className="gen-grid">
+            <div className="passwordContainer card">
+              {this.state.passwords.map((password, i) =>
+                <button key={i} id={"pass-" + i} className="secret" onClick={this.copyToClipBoard}>{password}</button>
+              )}
+            </div>
+
+            <div className="submit card">
+              <label className="field">
+                <span>How many</span>
+                <input type="number" min="1" max="20" placeholder="5" onChange={this.handleNumberInput}></input>
+              </label>
+              <label className="field">
+                <span>Length</span>
+                <input type="number" min="6" max="20" placeholder="12" onChange={this.handleLengthInput}></input>
+              </label>
+              <button onClick={() => this.getPasswords(this.state.numInput, this.state.lengthInput)} className="genButton btn-primary btn-block">Generate</button>
+            </div>
+          </div>
         </div>
       );
     }
     else {
-      return (<h1>Loading...</h1>)
+      return (<div className="gen-status"><h1>Loading…</h1></div>)
     }
   }
 

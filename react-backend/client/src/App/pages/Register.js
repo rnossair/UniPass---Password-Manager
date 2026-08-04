@@ -1,6 +1,7 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import "./auth.scss";
 class Register extends React.Component {
     constructor(props) {
         super(props);
@@ -43,14 +44,20 @@ class Register extends React.Component {
     }
     render() {
         return (
-            <div className="Register">
-                <p>Register</p>
-                <input type="text" placeholder="Username" id="userInput" onChange={this.handleInput} required />
-                <input type="text" placeholder="Password" id="passInput" onChange={this.handleInput} required />
-                <button onClick={this.register}>Register Now!</button>
-                <p>Already a member? <Link to="/login">Login</Link></p>
+            <div className="auth card">
+                <span className="eyebrow">Create your vault</span>
+                <h2>Join UniPass</h2>
+                <label className="field">
+                    <span>Username</span>
+                    <input type="text" placeholder="Pick a username" id="userInput" autoComplete="username" onChange={this.handleInput} required />
+                </label>
+                <label className="field">
+                    <span>Password</span>
+                    <input type="password" placeholder="Create a password" id="passInput" autoComplete="new-password" onChange={this.handleInput} required />
+                </label>
+                <button className="btn-primary btn-block" onClick={this.register}>Create account</button>
+                <p className="auth-alt">Already a member? <Link to="/login">Log in</Link></p>
                 {this.redirector()}
-
             </div>
         )
     }

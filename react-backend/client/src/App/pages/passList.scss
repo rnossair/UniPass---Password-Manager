@@ -1,0 +1,103 @@
+/* The vault: password list + add form, and the master-password gates. */
+#passListContainer {
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.vault-head h1 {
+  font-size: clamp(1.7rem, 5vw, 2.4rem);
+  margin: 0.4rem 0 0.25rem;
+}
+.vault-head p { margin: 0; }
+
+/* list */
+#passList {
+  padding: 0.5rem;
+}
+.passContainer {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  max-height: 42vh;
+  overflow-y: auto;
+}
+.passContainer::-webkit-scrollbar { width: 10px; }
+.passContainer::-webkit-scrollbar-thumb {
+  background: var(--surface-3);
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--surface);
+}
+
+.pass-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem;
+  border-radius: var(--radius-sm);
+}
+.pass-row + .pass-row { border-top: 1px solid var(--line); }
+.pass-name {
+  font-weight: 600;
+  color: var(--text);
+  flex: 0 0 38%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pass-row .secret {
+  flex: 1 1 auto;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pass-empty {
+  list-style: none;
+  text-align: center;
+  color: var(--text-faint);
+  padding: 2rem 1rem;
+}
+
+/* add-password form */
+#registerPass {
+  padding: 1.25rem;
+}
+#registerPass h4 {
+  font-size: 1.05rem;
+  margin: 0 0 0.9rem;
+}
+.inputContainer {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr auto auto;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+/* master-password gates */
+.mp-card {
+  width: 100%;
+  max-width: 440px;
+  margin-top: clamp(1rem, 6vh, 4rem);
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+.mp-card h3 { font-size: 1.4rem; margin: 0.3rem 0 0; }
+.mp-card p { margin: 0 0 0.4rem; font-size: 0.92rem; }
+
+.vault-status {
+  margin-top: 4rem;
+  text-align: center;
+}
+.vault-status h3 { color: var(--text-muted); font-weight: 500; }
+
+@media (max-width: 620px) {
+  .inputContainer { grid-template-columns: 1fr 1fr; }
+  .inputContainer input:first-child { grid-column: 1 / -1; }
+  .pass-name { flex-basis: 34%; }
+}

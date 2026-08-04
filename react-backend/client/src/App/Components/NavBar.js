@@ -1,70 +1,71 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./NavBar.scss";
-class NavBar extends React.Component{
-    constructor(props){
+
+class NavBar extends React.Component {
+    constructor(props) {
         super(props);
         this.state = {
             logged: false,
-            path: "/"
-        }
-        //this.handleLinkClick = this.handleLinkClick.bind(this)
+            menuOpen: false
+        };
+        this.toggleMenu = this.toggleMenu.bind(this);
+        this.closeMenu = this.closeMenu.bind(this);
     }
-    componentDidMount(){
-        let currPath = window.location.pathname;
-        if(document.getElementById(currPath)){
-            document.getElementById(currPath).classList.add("focusPage");
-        } 
-        fetch("/api/authCheck")
-        .then(res => res.json())
-        .then(obj => {
-            if(obj.result === "Approved"){
-                this.setState({logged: true});
-            }
-            else{
-                this.setState({logged: false});
-            }
-        });
-        return;
+
+    componentDidMount() {
+        fetch("https://password-manager-server.vercel.app/api/authCheck", {
+            method: "GET",
+            credentials: "include"
+        })
+            .then(res => res.json())
+            .then(obj => {
+                this.setState({ logged: obj.result === "Approved" });
+            })
+            .catch(() => this.setState({ logged: false }));
     }
-    componentDidUpdate(prevProvs, prevState){
-        let links = document.getElementsByClassName("Link");
-        if(document.getElementById(this.props.path)){
-            for(let i = 0; i < links.length; i++){
-                links[i].classList.remove("focusPage");
-            }
-            document.getElementById(this.props.path).classList.add("focusPage");
-        } 
+
+    toggleMenu() {
+        this.setState(s => ({ menuOpen: !s.menuOpen }));
     }
-    /*handleLinkClick(){
-        let currPath = window.location.pathname;
-        let links = document.getElementsByClassName("Link");
-        for(let i = 0; i < links.length; i++){
-            links[i].classList.remove("focusPage");
-        }
-        document.getElementById(currPath).classList.add("focusPage");
-        this.setState({path: currPath});
-    }*/
-    render(){
-        let element; 
-            if(this.state.logged){
-            element = <Link to="/profile" id="/profile" onClick={this.handleLinkClick} className="Link"><h2>Profile</h2></Link>;
-        }
-        else{
-            element = <Link to="/register" id="/register" onClick={this.handleLinkClick} className="Link"><h2>Sign up</h2></Link>
-        }
-       
-        return(
-            <div id="NavBar">
-                <h1 style={{"color": "#128C7E", "marginLeft": "2vh"}}>UniPass</h1>
-                <div id="links">
-                    <Link to="/" id="/" onClick={this.handleLinkClick} className="Link"><h2>About</h2></Link>
-                    <Link to="/passlist" id="/passlist" onClick={this.handleLinkClick} className="Link"><h2>Home</h2></Link>
-                    <Link to="/gen" id="/gen" onClick={this.handleLinkClick} className="Link"><h2>Generator</h2></Link>
-                    {element}   
+
+    closeMenu() {
+        this.setState({ menuOpen: false });
+    }
+
+    render() {
+        const linkClass = ({ isActive }) => (isActive ? "navlink active" : "navlink");
+        const accountLink = this.state.logged
+            ? <NavLink to="/profile" className={linkClass} onClick={this.closeMenu}>Profile</NavLink>
+            : <NavLink to="/register" className={linkClass} onClick={this.closeMenu}>Sign up</NavLink>;
+
+        return (
+            <header id="NavBar">
+                <div className="nav-inner container">
+                    <NavLink to="/" end className="brand" onClick={this.closeMenu} aria-label="UniPass home">
+                        <span className="brand-mark" aria-hidden="true" />
+                        UniPass
+                    </NavLink>
+
+                    <button
+                        className="nav-toggle"
+                        aria-label="Toggle navigation menu"
+                        aria-expanded={this.state.menuOpen}
+                        onClick={this.toggleMenu}
+                    >
+                        <span className={this.state.menuOpen ? "burger open" : "burger"} />
+                    </button>
+
+                    <nav id="links" className={this.state.menuOpen ? "open" : ""}>
+                        <NavLink to="/" end className={linkClass} onClick={this.closeMenu}>About</NavLink>
+                        <NavLink to="/passlist" className={linkClass} onClick={this.closeMenu}>Vault</NavLink>
+                        <NavLink to="/gen" className={linkClass} onClick={this.closeMenu}>Generator</NavLink>
+                        {accountLink}
+                    </nav>
                 </div>
-            </div>
-        )
+            </header>
+        );
     }
 }
+
 export default NavBar;

@@ -1,6 +1,7 @@
 import React from "react";
 import $ from "jquery";
 import AuthPoint from "./AuthPoint";
+import "./passList.scss";
 class passList extends React.Component {
     constructor(props) {
         super(props);
@@ -121,7 +122,17 @@ class passList extends React.Component {
 
     }
     passRender() {
-        let passArr = this.state.passwords.map((e) => { return (<li key={e.name}><p>{e.name}</p><button onClick={this.copyToClipBoard} id={e.name + "-" + e.password}>{e.password}</button></li>) });
+        if (!this.state.passwords || this.state.passwords.length === 0) {
+            return (<li className="pass-empty">No passwords saved yet. Add your first one below.</li>);
+        }
+        let passArr = this.state.passwords.map((e) => {
+            return (
+                <li key={e.name} className="pass-row">
+                    <span className="pass-name">{e.name}</span>
+                    <button className="secret" onClick={this.copyToClipBoard} id={e.name + "-" + e.password}>{e.password}</button>
+                </li>
+            )
+        });
         return passArr;
     }
     copyToClipBoard(e) {
@@ -147,9 +158,7 @@ class passList extends React.Component {
     }
     mpError() {
         if (this.state.mpassError) {
-            return (<div id="mpassError">
-                <p>Error: MasterPassword incorrect</p>
-            </div>)
+            return (<div className="notice notice-error">Master password incorrect.</div>)
         }
     }
     checkAuth() {
@@ -168,21 +177,25 @@ class passList extends React.Component {
         if (this.state.logged) {
             this.checkMasterPass();
             if (this.state.masterPassword !== "") {
-                return (<div id="passListContainer">
-                    <h1>Pass List:</h1>
-                    <div id="passList">
+                return (<div id="passListContainer" className="container">
+                    <header className="vault-head">
+                        <span className="eyebrow">Unlocked</span>
+                        <h1>Your vault</h1>
+                        <p>Tap any password to copy it to your clipboard.</p>
+                    </header>
+                    <div id="passList" className="card">
                         {this.getPasswords()}
                         <ul className="passContainer">
                             {this.passRender()}
                         </ul>
                     </div>
-                    <div id="registerPass">
-                        <h4>Add new password:</h4>
+                    <div id="registerPass" className="card">
+                        <h4>Add a password</h4>
                         <div className="inputContainer">
-                            <input type="text" placeholder="Website/Service" onChange={this.handleNameInput}></input>
+                            <input type="text" placeholder="Website or service" onChange={this.handleNameInput}></input>
                             <input type="text" placeholder="Password" onChange={this.handlePassInput} id="passInput"></input>
-                            <button onClick={this.generatePassword}>Generate Secure Password</button>
-                            <button onClick={this.submitPassword}>Submit</button>
+                            <button className="btn-ghost" onClick={this.generatePassword}>Generate</button>
+                            <button className="btn-primary" onClick={this.submitPassword}>Save</button>
                         </div>
                     </div>
                 </div>
@@ -190,26 +203,28 @@ class passList extends React.Component {
             }
             else {
                 if(!this.state.loaded){
-                    return(<h3>Loading...</h3>)
+                    return(<div className="vault-status"><h3>Loading…</h3></div>)
                 }
                 if (this.state.mpSet) {
                     return (
-
-                        <div id="masterPassSubmit">
-                            <h3>Enter your master password:</h3>
+                        <div id="masterPassSubmit" className="mp-card card">
+                            <span className="eyebrow">Locked</span>
+                            <h3>Enter your master password</h3>
+                            <p>This unlocks your vault. It's never sent anywhere in plain text.</p>
                             {this.mpError()}
-                            <input placeholder="Enter Master Password: " type="password"onChange={this.handleMasterPassInput}></input>
-                            <button onClick={this.submitMasterPass}>Submit</button>
+                            <input placeholder="Master password" type="password" onChange={this.handleMasterPassInput}></input>
+                            <button className="btn-primary btn-block" onClick={this.submitMasterPass}>Unlock</button>
                         </div>
-
                     )
                 }
                 else {
                     return (
-                        <div id="masterPassRegister">
-                            <h3>Register a new master password:</h3>
-                            <input placeholder="Master Password: " type="password" onChange={this.handleMasterPassInput}></input>
-                            <button onClick={this.registerMasterPass}>Submit</button>
+                        <div id="masterPassRegister" className="mp-card card">
+                            <span className="eyebrow">One-time setup</span>
+                            <h3>Create a master password</h3>
+                            <p>You'll use this to unlock your vault. Choose something strong — it can't be recovered.</p>
+                            <input placeholder="New master password" type="password" onChange={this.handleMasterPassInput}></input>
+                            <button className="btn-primary btn-block" onClick={this.registerMasterPass}>Create</button>
                         </div>
                     )
                 }
@@ -218,7 +233,7 @@ class passList extends React.Component {
 
         }
         else {
-            return (<h3>Loading...<AuthPoint failRedirect={true} /></h3>)
+            return (<div className="vault-status"><h3>Loading…</h3><AuthPoint failRedirect={true} /></div>)
         }
 
     }
